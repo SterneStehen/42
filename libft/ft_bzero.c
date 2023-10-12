@@ -1,0 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/11 18:39:05 by smoreron          #+#    #+#             */
+/*   Updated: 2023/10/11 18:39:05 by smoreron         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <strings.h>
+
+void ft_bzero(void *s, size_t n)
+{
+	size_t i;
+	char *str;
+
+	i = 0;
+	str = s;
+	while (i<n)
+	{
+		str[i] = 0;
+		i++;
+	}
+	return (s);
+}
+
+
+int main() {
+    char buffer1[10] = "Hello";
+	char buffer2[10] = "World";
+
+
+    printf("Befor zero\n");
+    printf("buffer1: %s\n", buffer1);
+    printf("buffer2: %s\n", buffer2);
+
+    bzero(buffer1, sizeof(buffer1));
+	ft_bzero(buffer2, sizeof(buffer2));
+
+    printf("\nAfter zero\n");
+    printf("buffer1: %s\n", buffer1); // Ничего не будет напечатано, так как память обнулена
+    printf("buffer2: %s\n", buffer2); // То же самое
+
+    return 0;
+}
+
+
+
