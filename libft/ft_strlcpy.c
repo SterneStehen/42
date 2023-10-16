@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+// #include <stdio.h>
 
-//#include "libft.h"
-#include <stdio.h>
-
-size_t ft_strlcpy(char *dst, const char *src, size_t l)
+size_t	ft_strlcpy(char *dst, const char *src, size_t l)
 {
 	size_t i, len;
 	len = 0;
@@ -34,15 +33,12 @@ size_t ft_strlcpy(char *dst, const char *src, size_t l)
 	dst[i] = '\0';
 	return (len);
 }
-int main()
-{
-	char dest[10];
-	const char *source = "Hello, World!";
-	size_t result;
-
-	result = ft_strlcpy(dest, source, sizeof(dest));
-
-	printf("Copied string: %s\n", dest);
-	printf("Total characters in source: %zu\n", result);
-
-}
+// int main()
+// {
+// 	char dest[10];
+// 	const char *source = "Hello, World!";
+// 	size_t result;
+// 	result = ft_strlcpy(dest, source, sizeof(dest));
+// 	printf("Copied string: %s\n", dest);
+// 	printf("Total characters in source: %zu\n", result);
+// }

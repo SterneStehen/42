@@ -1,43 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 23:13:26 by smoreron          #+#    #+#             */
-/*   Updated: 2023/10/12 23:13:26 by smoreron         ###   ########.fr       */
+/*   Created: 2023/10/16 14:13:41 by smoreron          #+#    #+#             */
+/*   Updated: 2023/10/16 14:13:41 by smoreron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "libft.h"
 // #include <stdio.h>
 // #include <string.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t i;
 	i = 0;
-	char *d = dest;
-	const char*s = src;
 
-	while (i < n)
+	if (n == 0)
+		return (0);
+
+	while ((s1[i] || s2[i]) && i < n)
 	{
-		d[i] = s[i];
+		if(s1[i] != s2[i])
+			return ((unsigned char)s1[i]-(unsigned char)s2[i]);
 		i++;
 	}
-	return (dest);
+	return (0);
 }
 
 // int main()
 // {
-// 	char s[16] = "SergiiMorarenko";
-// 	char s1[16] = "SergiiMorarenko";
-// 	printf("befor memmove = %s\n", s);
-// 	printf("befor ft_memmove = %s1\n", s1);
-// 	memmove(s+1, s, 5);
-// 	ft_memmove(s1+1, s1, 5);
-// 	printf("after memmove = %s\n", s);
-// 	printf("after ft_memmove = %s1\n", s1);
+// 	char str1[15] = "SeagiiMorarenko";
+// 	char str2[15] = "SergiiMorarenka";
+// 	printf("result retururn MY_funct is %d\n", ft_strncmp(str1, str2, 4));
+// 	printf("result retururn function is %d\n", strncmp(str1, str2, 4));
 // }

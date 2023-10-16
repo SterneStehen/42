@@ -1,33 +1,20 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 16:25:59 by smoreron          #+#    #+#             */
-/*   Updated: 2023/10/11 16:25:59 by smoreron         ###   ########.fr       */
+/*   Created: 2023/10/13 14:36:41 by smoreron          #+#    #+#             */
+/*   Updated: 2023/10/13 14:36:41 by smoreron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
-//#include <string.h>
 #include "libft.h"
 
-int ft_strlen(const char *str)
+int	ft_tolower(int c)
 {
-	int i;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	if (c >= 65 && c <= 90)
+		c = c + 32;
+	return c;	
 }
-
-// int main()
-// {	
-// 	char s[] = "sergii";
-// 	printf("len = %d", ft_strlen(s));
-// }

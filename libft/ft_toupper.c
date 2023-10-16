@@ -1,33 +1,27 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 16:25:59 by smoreron          #+#    #+#             */
-/*   Updated: 2023/10/11 16:25:59 by smoreron         ###   ########.fr       */
+/*   Created: 2023/10/13 14:19:00 by smoreron          #+#    #+#             */
+/*   Updated: 2023/10/13 14:19:00 by smoreron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
-//#include <string.h>
+//#include <stdio.h>
 #include "libft.h"
 
-int ft_strlen(const char *str)
+int ft_toupper(int c)
 {
-	int i;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	if (c >= 97 && c <= 122)
+		c = c - 32;
+	return c;
+	
 }
 
 // int main()
-// {	
-// 	char s[] = "sergii";
-// 	printf("len = %d", ft_strlen(s));
+// {
+// 	printf("result is %c", ft_toupper('f'));
 // }

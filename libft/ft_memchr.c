@@ -1,43 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 23:13:26 by smoreron          #+#    #+#             */
-/*   Updated: 2023/10/12 23:13:26 by smoreron         ###   ########.fr       */
+/*   Created: 2023/10/16 14:39:50 by smoreron          #+#    #+#             */
+/*   Updated: 2023/10/16 14:39:50 by smoreron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "libft.h"
 // #include <stdio.h>
 // #include <string.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void *ft_memchr(const void *s, int c, size_t n)
 {
 	size_t i;
 	i = 0;
-	char *d = dest;
-	const char*s = src;
-
+	const unsigned char *str = (const unsigned char *)s;
 	while (i < n)
 	{
-		d[i] = s[i];
+		if (str[i] == (unsigned char)c)
+		{
+			return (void *)(str + i);
+		}
 		i++;
 	}
-	return (dest);
+	return NULL;
 }
 
 // int main()
 // {
-// 	char s[16] = "SergiiMorarenko";
-// 	char s1[16] = "SergiiMorarenko";
-// 	printf("befor memmove = %s\n", s);
-// 	printf("befor ft_memmove = %s1\n", s1);
-// 	memmove(s+1, s, 5);
-// 	ft_memmove(s1+1, s1, 5);
-// 	printf("after memmove = %s\n", s);
-// 	printf("after ft_memmove = %s1\n", s1);
+// 	char str[17] = "Sergii Morarenko";
+// 	char *ptr;
+// 	ptr = memchr(str, 'o', sizeof(str));
+// 	//ptr = ft_memchr(str, 'o', sizeof(str));
+// 	printf("%ld", ptr-str);
 // }

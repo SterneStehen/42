@@ -1,43 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 23:13:26 by smoreron          #+#    #+#             */
-/*   Updated: 2023/10/12 23:13:26 by smoreron         ###   ########.fr       */
+/*   Created: 2023/10/13 14:42:11 by smoreron          #+#    #+#             */
+/*   Updated: 2023/10/13 14:42:11 by smoreron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "libft.h"
 // #include <stdio.h>
 // #include <string.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+char	*ft_strchr(const char *s, int c)
 {
-	size_t i;
+	int i;
+	char tmp = (char)c;
 	i = 0;
-	char *d = dest;
-	const char*s = src;
-
-	while (i < n)
+	while (s[i])
 	{
-		d[i] = s[i];
+		if(s[i] == tmp)
+		{
+			//printf("test occurence is %c\n", s[i]);
+			return (char *)&s[i];
+		}
 		i++;
 	}
-	return (dest);
+	if (s[i] == '\0')
+		return (char *)&s[i];
+	return 0;	
 }
 
 // int main()
 // {
-// 	char s[16] = "SergiiMorarenko";
-// 	char s1[16] = "SergiiMorarenko";
-// 	printf("befor memmove = %s\n", s);
-// 	printf("befor ft_memmove = %s1\n", s1);
-// 	memmove(s+1, s, 5);
-// 	ft_memmove(s1+1, s1, 5);
-// 	printf("after memmove = %s\n", s);
-// 	printf("after ft_memmove = %s1\n", s1);
+// 	char str[15] = "sergiiMorarenko";
+// 	char *ptr = ft_strchr(str, 'o');
+// 	//char *ptr = strchr(str, 'o');
+// 	printf("first occurence is %ld", ptr - str);
 // }

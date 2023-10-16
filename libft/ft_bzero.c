@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <strings.h>
+// #include <stdio.h>
+// #include <strings.h>
+#include "libft.h"
 
-void ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
 	size_t i;
 	char *str;
@@ -29,24 +30,20 @@ void ft_bzero(void *s, size_t n)
 }
 
 
-int main() {
-    char buffer1[10] = "Hello";
-	char buffer2[10] = "World";
+// int main() {
+//     char buffer1[10] = "Hello";
+// 	char buffer2[10] = "World";
 
+//     printf("Befor zero\n");
+//     printf("buffer1: %s\n", buffer1);
+//     printf("buffer2: %s\n", buffer2);
 
-    printf("Befor zero\n");
-    printf("buffer1: %s\n", buffer1);
-    printf("buffer2: %s\n", buffer2);
+//     bzero(buffer1, sizeof(buffer1));
+// 	ft_bzero(buffer2, sizeof(buffer2));
 
-    bzero(buffer1, sizeof(buffer1));
-	ft_bzero(buffer2, sizeof(buffer2));
+//     printf("\nAfter zero\n");
+//     printf("buffer1: %s\n", buffer1); // Ничего не будет напечатано, так как память обнулена
+//     printf("buffer2: %s\n", buffer2); // То же самое
 
-    printf("\nAfter zero\n");
-    printf("buffer1: %s\n", buffer1); // Ничего не будет напечатано, так как память обнулена
-    printf("buffer2: %s\n", buffer2); // То же самое
-
-    return 0;
-}
-
-
-
+//     return 0;
+// }

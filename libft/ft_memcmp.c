@@ -1,43 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/12 23:13:26 by smoreron          #+#    #+#             */
-/*   Updated: 2023/10/12 23:13:26 by smoreron         ###   ########.fr       */
+/*   Created: 2023/10/16 15:33:01 by smoreron          #+#    #+#             */
+/*   Updated: 2023/10/16 15:33:01 by smoreron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "libft.h"
 // #include <stdio.h>
 // #include <string.h>
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t i;
 	i = 0;
-	char *d = dest;
-	const char*s = src;
+	const unsigned char *str1 = (const unsigned char*)s1;
+	const unsigned char *str2 = (const unsigned char*)s2;
 
 	while (i < n)
 	{
-		d[i] = s[i];
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
 		i++;
 	}
-	return (dest);
+	return (0);	
 }
 
 // int main()
 // {
-// 	char s[16] = "SergiiMorarenko";
-// 	char s1[16] = "SergiiMorarenko";
-// 	printf("befor memmove = %s\n", s);
-// 	printf("befor ft_memmove = %s1\n", s1);
-// 	memmove(s+1, s, 5);
-// 	ft_memmove(s1+1, s1, 5);
-// 	printf("after memmove = %s\n", s);
-// 	printf("after ft_memmove = %s1\n", s1);
+// 	char str1[17] = "SergiiMorarenko";
+// 	char str2[18] = "Sergiitsipenko";
+// 	printf("My_function %d\n", ft_memcmp(str1, str2, sizeof(str1)));
+// 	printf("result is %ld", memcmp(str1, str2, sizeof(str1)));
 // }
+
+
