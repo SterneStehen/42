@@ -16,27 +16,23 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int i;
-	char tmp = (char)c;
-	i = 0;
-	while (s[i])
+	while (*s)
 	{
-		if(s[i] == tmp)
+		if (*s == (char)c)
 		{
-			//printf("test occurence is %c\n", s[i]);
-			return (char *)&s[i];
+			return (char*)s;
 		}
-		i++;
+		s++;
 	}
-	if (s[i] == '\0')
-		return (char *)&s[i];
-	return 0;	
+	if (*s=='\0')
+		return (char*)s;
+	return NULL;
 }
 
-// int main()
-// {
-// 	char str[15] = "sergiiMorarenko";
-// 	char *ptr = ft_strchr(str, 'o');
-// 	//char *ptr = strchr(str, 'o');
-// 	printf("first occurence is %ld", ptr - str);
-// }
+int main()
+{
+	char str[15] = "sergiiMorarenko";
+	char *ptr = ft_strchr(str, 'n');
+	//char *ptr = strchr(str, 'o');
+	printf("first occurence is %ld", ptr - str);
+}
