@@ -12,36 +12,37 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 char *ft_strtrim(char const *s1, char const *set)
 {
-	char *res;
-	int i;
+	int s, e, i;
+	s = 0;
 	i = 0;
-	res = (char*)malloc(sizeof(s1));
+	e = 0;
+	char *res;
+
+	while (s1[e+1])
+		e++;
+	while (s1[s] == set[0])
+		s++;
+	while (s1[e] == set[0])
+		e--;
+	res =  (char*)malloc(s+e+1);
 	if(!res)
 		return NULL;
-	while (s1[i])
+	while (s <= e)
 	{
-		if (s1[i] == set[0])
-		{
-			i++;
-			continue;
-		}
-		else
-		{
-			res[i] = s1[i]; 
-			i++;
-		}
+		res[i++] = s1[s++];
 	}
 	res[i] = '\0';
-	return res;	
+	return res;
 }
 
-int main()
-{
-	char const str1[] = "pHellop";
-	char const str2[] = "p";
-	char *new_str = ft_strtrim(str1, str2);
-	puts(new_str);
-}
+// int main()
+// {
+// 	char const str1[] = "pppHelppLop";
+// 	char const str2[] = "p";
+// 	char *new_str = ft_strtrim(str1, str2);
+// 	puts(new_str);
+// }
