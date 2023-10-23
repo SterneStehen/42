@@ -1,4 +1,5 @@
 #include "libft.h"
+#include <strlib.h>
 
 
 int main()
@@ -35,6 +36,15 @@ int main()
 	printf("success! memory allocated\n");
 	//free(arr);
 	return 0;
+	puts('_________________________');
 
+	const char str1[] = "Sergii";
+	const char str2[] = "Morarenko";
+	char *res;
+	res = ft_strjoin(str1, str2);
+	puts(res);	
+	free(res);
 }
+
+
 

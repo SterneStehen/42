@@ -1,5 +1,6 @@
 #include <stddef.h>
 #include <stdio.h>
+#include <strlib.h>
 #ifndef LIBFT_H
 #define LIBFT_H
 
@@ -13,6 +14,7 @@ int	ft_toupper(int c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strrchr(const char *s, int c);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t l);

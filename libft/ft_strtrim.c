@@ -1,40 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/16 12:36:24 by smoreron          #+#    #+#             */
-/*   Updated: 2023/10/16 12:36:24 by smoreron         ###   ########.fr       */
+/*   Created: 2023/10/23 01:41:00 by smoreron          #+#    #+#             */
+/*   Updated: 2023/10/23 01:41:00 by smoreron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdio.h>
-// #include <string.h>
-#include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-char *ft_strrchr(const char *s, int c)
+char *ft_strtrim(char const *s1, char const *set)
 {
-	char *tmp;
+	char *res;
 	int i;
 	i = 0;
-	while (s[i])
+	res = (char*)malloc(sizeof(s1));
+	if(!res)
+		return NULL;
+	while (s1[i])
 	{
-		if (s[i] == (char)c)
-			tmp = (char *)&s[i];
-		i++;
+		if (s1[i] == set[0])
+		{
+			i++;
+			continue;
+		}
+		else
+		{
+			res[i] = s1[i]; 
+			i++;
+		}
 	}
-	if	(c == '\0')
-		return (char *)&s[i];
-	return (tmp);	
+	res[i] = '\0';
+	return res;	
 }
 
-// int main()
-// {
-// 	const char str[15] = "SergiiMorarenko";
-// 	char *ptr = strrchr(str, 'e');
-// 	//char *ptr = ft_strrchr(str, 'e');
-// 	printf("result occurent is %ld", ptr - str);
-
-// }
+int main()
+{
+	char const str1[] = "pHellop";
+	char const str2[] = "p";
+	char *new_str = ft_strtrim(str1, str2);
+	puts(new_str);
+}
