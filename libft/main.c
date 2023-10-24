@@ -1,13 +1,10 @@
 #include "libft.h"
-#include <strlib.h>
-
+// #include <strlib.h>
 
 int main()
 {
 	char *str = "sergiiMorarenko";
 	printf("len string is %d\n", ft_strlen(str));
-	
-
 	char *s = "sergiiMorarenko";
 	char d[16];
 	printf("befor use ft_strlcpy : %s\n", d);
@@ -36,7 +33,7 @@ int main()
 	printf("success! memory allocated\n");
 	//free(arr);
 	return 0;
-	puts('_________________________');
+	//puts('_________________________');
 
 	const char str1[] = "Sergii";
 	const char str2[] = "Morarenko";
@@ -45,6 +42,3 @@ int main()
 	puts(res);	
 	free(res);
 }
-
-
-

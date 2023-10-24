@@ -10,23 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+#include "libft.h"
 
-char *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	int s, e, i;
 	s = 0;
 	i = 0;
 	e = 0;
 	char *res;
-
+	if (!s1 || !set)
+		return NULL;
 	while (s1[e+1])
 		e++;
 	while (s1[s] == set[0])
 		s++;
-	while (s1[e] == set[0])
+	while (s1[e] == set[0] && s < e)
 		e--;
 	res =  (char*)malloc(s+e+1);
 	if(!res)
