@@ -95,11 +95,19 @@
 //     free(words);
 //     return (0);
 // }
+// int main(void)
+// {
+//     // char *source = "abcdefgh";
+//     // char *result = ft_strmapi(source, to_upper_at_even_index);
+//     // printf("%s\n", result);
+//     // free(result);
+// 	int x = 1234;
+// 	ft_putnbr_fd(x, 1);
+//     return (0);
+// }
 int main(void)
 {
-    char *source = "abcdefgh";
-    char *result = ft_strmapi(source, to_upper_at_even_index);
-    printf("%s\n", result); // Ожидаемый вывод: "AbCdEfGh"
-    free(result);
+	int x = 1244434;
+	ft_putnbr_fd(x, 1);
     return (0);
 }
