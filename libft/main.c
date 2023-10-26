@@ -72,26 +72,34 @@
 //     return 0;
 // }
 
+// int main(void)
+// {
+//     char **words;
+//     char *str = "Hello,how,are,you,today?";
+//     char delim = ',';
+//     int i = 0;
+
+//     words = ft_split(str, delim);
+//     if (!words)
+//     {
+//         printf("Error in splitting\n");
+//         return (1);
+//     }
+
+//     while (words[i])
+//     {
+//         printf("Word[%d]: %s\n", i, words[i]);
+//         free(words[i]);
+//         i++;
+//     }
+//     free(words);
+//     return (0);
+// }
 int main(void)
 {
-    char **words;
-    char *str = "Hello,how,are,you,today?";
-    char delim = ',';
-    int i = 0;
-
-    words = ft_split(str, delim);
-    if (!words)
-    {
-        printf("Error in splitting\n");
-        return (1);
-    }
-
-    while (words[i])
-    {
-        printf("Word[%d]: %s\n", i, words[i]);
-        free(words[i]);
-        i++;
-    }
-    free(words);
+    char *source = "abcdefgh";
+    char *result = ft_strmapi(source, to_upper_at_even_index);
+    printf("%s\n", result); // Ожидаемый вывод: "AbCdEfGh"
+    free(result);
     return (0);
 }
