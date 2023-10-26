@@ -10,27 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+// #include <stdio.h>
+// #include <string.h>
+// #include <stdlib.h>
+#include "libft.h"
 
 char *ft_strdup(const char *s)
 {
-	char *pnt;
-	int i;
-	i = 0;
-	while (s[i] != '\0')
-	{
-		pnt[i] = s[i];
-		i++;
-	}
-	pnt[i] = '\0';
-	return (char *)pnt;	
+	char *dst;
+	size_t len;
+
+	len =  ft_strlen(s);
+	dst = (char *)malloc((sizeof(char) * len) + 1);
+	if (!dst)
+		return 0;
+	ft_memcpy(dst, s, len);
+	dst[len] = '\0';
+	return (dst);	
 }
-int main()
-{
-	const char str[20] = "SergiiMorarenko";
-	char *new = "1";
-	printf("Befor string is %s\n", new);
-	new = ft_strdup(str);
-	printf("new string is %s", new);
-}
+// int main()
+// {
+// 	const char str[20] = "SergiiMorarenko";
+// 	char *new = "1";
+// 	printf("Befor string is %s\n", new);
+// 	new = ft_strdup(str);
+// 	printf("new string is %s", new);
+// }

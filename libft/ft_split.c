@@ -11,75 +11,59 @@
 /* ************************************************************************** */
 
 // #include <stdio.h>
- #include <stdlib.h>
+//#include <stdlib.h>
 #include "libft.h"
 
+int ft_world_count( char const *str, char c)
+{
+	int count;
+	int in_word;
+	count = 0;
+	in_word = 0;
+	while (*str)
+	{
+		if (*str == c)
+		{
+			in_word = 0;
+		}
+		else if(!in_word)
+		{
+			in_word = 1;
+			count++;
+		}
+		str++;
+	}
+	return (count);
+}
 char	**ft_split(char const *s, char c)
 {
-	int world_count;
-	int ind_arr;
-	int long_world;
-	char **result;
-	int tmp;
+	int world_count;	
 	int i;
 	int j;
-	int len;
-	world_count = 1;
-	long_world = 0;
-	tmp = 0;
-	len = 0;
-	j = 0;
-	i = 0;
-	ind_arr = 0;
-	while (s[len])
-	{
-		if (s[len] == c)
-		{
-			world_count++;
-			len++;
-			tmp = 0;
-		}
-		else
-		{
-			len++;
-			tmp++;
-			printf("test tmp = %d", tmp);
-			if (tmp > long_world)
-				long_world = tmp;
-		}
-	}
-	printf("%c\n", s[0]);
-	printf("test wold_counter = %d, long_world = %d\n", world_count, long_world);
-	// result = (char**)malloc(long_world * world_count + 1);
- 	// if(!result)
- 	// 	return NULL;
-	//i = 0;
-	// while (s[i])
-	// {
-	// 	printf("%c\n", s[0]);
- 	// 	if (s[i] != c)
- 	// 	{
- 	// 		result[0][0] = s[i++];
- 	// 		printf("%c\n", s[i]);			
- 	// 	}
- 	// 	else
- 	// 	{
- 	// 		result[ind_arr++][j++] = '\0';
- 	// 		j = 0;
- 	// 	}
- 	// }
+	int start;
+	char **result;
 	
-	// for (int i = 0; i < ind_arr; i++)
-	// {
-	// 	for (int j = 0; i < long_world; i++)
-	// 	{
-	// 		printf("%c\n", s[i]);
-	// 	}		
-	// }	
-	//return NULL;
+	i = 0;
+	j = 0;
+
+	world_count = ft_world_count(s, c);
+	result = (char **)malloc(sizeof(char*) * (world_count + 1));
+	if(!result)
+		return NULL;
+	while (s[i])
+	{
+		while (s[i] == c && s[i])
+		{
+			i++;
+		}
+		start = i;
+		while (s[i] != c && s[i])
+		{
+			i++;
+		}
+		if(i > start)
+			result[j++] = ft_substr(s, start, i - start);		
+	}
+	result[j] = NULL;
+	return (result);
 }
-// int main()
-// {
-// 	char str[] = "Hello_world_hay_your_day";
-// 	char **result = ft_split(str, '_');
-// }
