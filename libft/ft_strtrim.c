@@ -15,22 +15,33 @@
 // #include <string.h>
 #include "libft.h"
 
+static int	ft_isinset(char const c, char const *set)
+{
+	while (*set)
+	{
+		if (c == *set)
+			return (1);
+		set++;
+	}
+	return (0);
+}
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int s, e, i;
+	int	s;
+	int	e;
+	int	i;
+	
 	s = 0;
 	i = 0;
-	e = 0;
 	char *res;
 	if (!s1 || !set)
 		return NULL;
-	while (s1[e+1])
-		e++;
-	while (s1[s] == set[0])
+	e = ft_strlen(s1) - 1;
+	while (s1[s] && ft_isinset(s1[s], set))
 		s++;
-	while (s1[e] == set[0] && s < e)
+	while (e >= s && ft_isinset(s1[e], set))
 		e--;
-	res =  (char*)malloc(s+e+1);
+	res =  (char*)malloc(e-s+2);
 	if(!res)
 		return NULL;
 	while (s <= e)

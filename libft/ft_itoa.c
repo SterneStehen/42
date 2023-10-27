@@ -9,19 +9,22 @@
 /*   Updated: 2023/10/26 03:12:18 by smoreron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 //#include <stdio.h>
-int ft_intlen(int n)
-{
-	int len;
-	len = 0;
 
-	if(n == 0)
+int	ft_intlen(int n)
+{
+	int	len;
+
+	len = 0;
+	
+	if (n == 0)
 		return 1;
-	if(n < 0)
+	if (n < 0)
 	{
-		len++;
-		n = -1*n;
+    	len++;
+		n = -1 * n;
 	}
 	while (n > 0)
 	{
@@ -31,12 +34,16 @@ int ft_intlen(int n)
 	return (len);
 }
 
-char *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-	int len;
-	char *res;
-	unsigned int num;
+	int	len;
+	char	*res;
+	unsigned int	num;
 
+	if (n == -2147483648)
+	{
+		return (ft_strdup("-2147483648"));
+	}
 	len = ft_intlen(n);
 	res = (char *)malloc(len+1);
 	if (!res)
@@ -46,6 +53,7 @@ char *ft_itoa(int n)
 	if (n == 0)
 	{
 		res[0] = '0';
+		res[1] = '\0';
 		return (res);
 	}
 	if (n < 0)
@@ -59,7 +67,7 @@ char *ft_itoa(int n)
 	while (num > 0)
 	{
 		res[--len] = (num%10) + '0';
-		num/=10;
+		num /= 10;
 	}
 	return (res);
 }

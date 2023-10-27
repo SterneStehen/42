@@ -15,33 +15,23 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t i,j, dst_len, src_len;
+	size_t	j;
+	size_t	to_copy;
+	size_t	dst_len;
+	size_t	src_len;
 	
-	i = 0;
 	j = 0;
-
-	while (src[i])
-	{
-		i++;
-	}
-	src_len = i;
-	i = 0;
-	while (dst[i] && i < size)
-	{
-		i++;
-	}
-	dst_len = i;	
-	
-	if ((dst_len) == size)
-		return(dst_len+src_len);
-
-	while (src[j] && ((i + j) <= (size-1)))
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	if (size <= dst_len)
+		return src_len + size;
+	to_copy = (src_len >= size - dst_len) ? size - dst_len - 1 : src_len;
+	while (j < to_copy)
 		{
-			dst[i+j] = src[j];
+			dst[dst_len+j] = src[j];
 			j++;
 		}
-		dst[i+j] = '\0';		
-	
+		dst[dst_len+j] = '\0';		
 	return (dst_len + src_len);
 }
 // int main() {

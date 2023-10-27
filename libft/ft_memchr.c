@@ -14,20 +14,22 @@
 // #include <string.h>
 #include "libft.h"
 
-void *ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t i;
+	size_t	i;
+	const unsigned char	*str;
+	
 	i = 0;
-	const unsigned char *str = (const unsigned char *)s;
+	str = (const unsigned char *)s;
 	while (i < n)
 	{
 		if (str[i] == (unsigned char)c)
 		{
-			return (void *)(str + i);
+			return (void *) (str + i);
 		}
 		i++;
 	}
-	return NULL;
+	return (NULL);
 }
 
 // int main()

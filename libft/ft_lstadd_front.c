@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:42:11 by smoreron          #+#    #+#             */
-/*   Updated: 2023/10/13 14:42:11 by smoreron         ###   ########.fr       */
+/*   Created: 2023/10/27 13:45:28 by smoreron          #+#    #+#             */
+/*   Updated: 2023/10/27 13:45:28 by smoreron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-// #include <stdio.h>
-// #include <string.h>
+
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	while (*s)
-	{
-		if (*s == (char)c)
-		{
-			return (char*)s;
-		}
-		s++;
-	}
-	if ((char)c =='\0')
-		return (char*)s;
-	return NULL;
+	if(!new)
+		return;
+	new->next = *lst;
+	*lst = new;
 }
-
-// int main()
-// {
-// 	char str[15] = "sergiiMorarenko";
-// 	char *ptr = ft_strchr(str, 'n');
-// 	//char *ptr = strchr(str, 'o');
-// 	printf("first occurence is %ld", ptr - str);
-// }

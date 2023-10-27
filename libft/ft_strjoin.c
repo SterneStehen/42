@@ -14,11 +14,12 @@
 //#include <stdio.h>
 //#include <stdlib.h>
 
-char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int i;
-	int j;
-	char *result;
+	int	i;
+	int	j;
+	char	*result;
+	
 	i = 0;
 	j = 0;
 	while (s1[i])
@@ -32,9 +33,8 @@ char *ft_strjoin(char const *s1, char const *s2)
 	result = (char*)malloc(sizeof(char) * (i+j+1));
 	if (!result)
 	{
-		NULL;
+		return NULL;
 	}
-	
 	i = 0;
 	while (*s1)
 	{

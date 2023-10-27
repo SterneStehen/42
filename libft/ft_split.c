@@ -14,10 +14,11 @@
 //#include <stdlib.h>
 #include "libft.h"
 
-int ft_world_count( char const *str, char c)
+int	ft_world_count( char const *str, char c)
 {
 	int count;
 	int in_word;
+
 	count = 0;
 	in_word = 0;
 	while (*str)
@@ -37,15 +38,14 @@ int ft_world_count( char const *str, char c)
 }
 char	**ft_split(char const *s, char c)
 {
-	int world_count;	
-	int i;
-	int j;
-	int start;
-	char **result;
+	int	world_count;	
+	int	i;
+	int	j;
+	int	start;
+	char	**result;
 	
 	i = 0;
 	j = 0;
-
 	world_count = ft_world_count(s, c);
 	result = (char **)malloc(sizeof(char*) * (world_count + 1));
 	if(!result)

@@ -16,17 +16,16 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t i;
-	char *str;
+	size_t	i;
+	unsigned char	*str;
 
 	i = 0;
-	str = s;
+	str = (unsigned char *)s;
 	while (i < n)
 	{
 		str[i] = 0;
 		i++;
 	}
-	return (s);
 }
 // int main() {
 //     char buffer1[10] = "Hello";

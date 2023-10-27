@@ -26,9 +26,9 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned int len;
-	unsigned int i;
-	char *result;
+	unsigned int	len;
+	unsigned int	i;
+	char	*result;
 
 	i = 0;
 	len = ft_strlen(s);
@@ -37,15 +37,13 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		return NULL;
 	while (i < len)
 	{
-		
-		//printf("s[i] = %c\n", s[i]);
 		result[i] = f(i, s[i]);	
 		i++;	
 	}
 	result[i] = '\0';
-	//puts(result);
 	return result;
 }
+
 // int main(void)
 // {
 //     char *source = "abcdefgh";

@@ -12,14 +12,15 @@
 
 // #include <stdio.h>
 // #include <string.h>
+#include "libft.h"
 
-#//include "libft.h"
-
-char *ft_strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	char *tmp;
-	int i;
+	char	*tmp;
+	int	i;
+	
 	i = 0;
+	tmp = NULL;
 	while (s[i])
 	{
 		if (s[i] == (char)c)
@@ -37,5 +38,4 @@ char *ft_strrchr(const char *s, int c)
 // 	char *ptr = strrchr(str, 'e');
 // 	//char *ptr = ft_strrchr(str, 'e');
 // 	printf("result occurent is %ld", ptr - str);
-
 // }

@@ -9,34 +9,18 @@
 /*   Updated: 2023/10/11 17:23:35 by smoreron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 // #include <stdio.h>
 // #include <string.h>
 #include "libft.h"
 
-// void	*ft_memset2(void *s, int c, size_t n)
-// {
-// 	size_t	i;
-// 	char	*str;
-
-// 	i = 0;
-// 	str = s;
-// 	while (i < n)
-// 	{
-// 		str[i] = c;
-// 		i++;
-// 	}
-// 	return (s);
-// }
-
-void *ft_memset(void *s, int c, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	size_t i;
-	char *str;
+	size_t	i;
+	char	*str;
 
 	str = s;
 	i = 0;
-	while (i<=n)
+	while (i<n)
 	{
 		str[i] = c;
 		i++;

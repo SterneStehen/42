@@ -10,28 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
 #include "libft.h"
-#include <strings.h>
+//#include <strings.h>
 
-
-void *ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void *array;
+	void	*array;
+	
+	if (nmemb && size && (size_t)-1 / nmemb < size)
+		return (NULL);
 	array = (void*)malloc(nmemb*size);
 	if (array == NULL)
 	{
-		return NULL;
+		return (NULL);
 	}
-	ft_bzero(array, sizeof(nmemb*size));
+	ft_bzero(array, nmemb * size);
 	return(array);
 }
 
 // int main()
 // {
-// 	int i;
-	
+// 	int i;	
 // 	i = 0;
 // 	int *arr = (int *)calloc(5, sizeof(int));
 // 	if (arr == NULL)

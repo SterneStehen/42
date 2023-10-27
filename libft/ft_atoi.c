@@ -15,24 +15,24 @@
 // #include <stdlib.h>
 #include "libft.h"
 
-int ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
-	int i, neg;
-	unsigned long int num;
-	
+	int	i;
+	int	neg;
+	long	num;
+
 	i = 0;
 	num = 0;
 	neg = 1;
-	while (nptr[i] == ' ' || (nptr[i] >= 9 &&  nptr[i] <= 13))
-	{		
+	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
+	{
 			i++;
-			printf("test1 i %d\n", i);
 	}
-	while (nptr[i] == 43 || nptr[i] == 45)
+	if (nptr[i] == 43 || nptr[i] == 45)
 	{
 		if (nptr[i] == 45)
 		{
-			neg = -1*neg;
+			neg = -1 * neg;
 			i++;
 		}
 		else
@@ -42,16 +42,18 @@ int ft_atoi(const char *nptr)
 	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		num = num*10 + (nptr[i] - '0');
+		if (num * neg > 2147483647 || num * neg < -2147483648)
+		{
+			return (neg == 1 ? 2147483647 : -2147483648);
+		}
+		num = (num * 10) + (nptr[i] - '0');
 		i++;
-		printf("test2 i = %d n = %d\n", i, num);
 	}
-	return (num * neg);	
+	return (num * neg);
 }
-
-int main()
-{
-	char s[20] = " 	-+--2349jl";
-	printf("Atoi result is %d\n", atoi(s));
-	printf("My_function is %d\n", ft_atoi(s));
-}
+// int main()
+// {
+// 	char s[20] = " 	-+--2349jl";
+// 	printf("Atoi result is %d\n", atoi(s));
+// 	printf("My_function is %d\n", ft_atoi(s));
+// }
