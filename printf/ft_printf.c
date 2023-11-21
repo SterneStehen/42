@@ -10,77 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <stdio.h>
+#include "ft_printf.h"
 #include <stdarg.h>
 
-
-int ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-int ft_putnrb(int n)
-{
-	long long int	num;
-
-	num = n;
-	if (n < 0)
-	{
-		ft_putchar('-');
-		num *= -1;
-	}
-	if (num > 9)
-	{
-		ft_putnbr(num / 10);
-		ft_putnbr(num % 10);
-	}
-	else
-		ft_putchar(num + '0');
-}
-int ft_putstr(char *s)
-{
-	int counter = 0;
-	while (*s)
-	{
-		ft_putchar(*s);
-		count++;
-		s++;
-	}
-	return counter;
-}
-void ft_putunisignet(unisigned int n)
-{
-	static char number[11] = "0123456789";
-
-	if(n > 9)
-	{
-		ft_putunisignet(n/10);
-	}
-	write(1, &number[n%10], 1);
-}
-int ft_case(char str, va_list arg)
+int ft_case(char str, va_list args)
 {
 	switch (str)
 	{
-	case '%':
-		return (write(1, "%", 1));
 	case 'c':
-		ft_putchar(va_arg(args, int));
-		return(1); 
+		return(ft_putchar(va_arg(args, int))); 
 	case 's':
 		return(ft_putstr(va_arg(args, char *)));
 	case 'p':
-		return(ft_putnrb(va_arg(args, void *)));
+		return(ft_putptr(va_arg(args, void *)));
 	case 'd':
-		return(ft_putnrb(va_arg(args, int)));
+		return(ft_putnbr(va_arg(args, int)));
 	case 'i':
-		return(ft_putnrb(va_arg(args, int)));
+		return(ft_putnbr(va_arg(args, int)));
 	case 'u':
-
-
-	
-	default:
-		break;
+		return(ft_putunisignet(va_arg(args, int)));
+	case 'x':
+		return(ft_puthexadecimal(va_arg(args, int), 0));
+	case 'X':
+		return(ft_puthexadecimal(va_arg(args, int), 1));
+	case '%':
+		return (write(1, "%", 1));
+	return (0);
 	}
 }
 int ft_printf(const char *format, ...)
@@ -88,14 +43,23 @@ int ft_printf(const char *format, ...)
 	va_list ap;
 	va_start(ap, format);
 	int count;
-	while (*format != '\0')
+	int i;
+
+	i = 0;
+	count = 0;
+	while (format[i] != '\0')
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
-			format++;
-			count += ft_case(format, ap);
+			i++;
+			count += ft_case(format[i], ap);
 		}
+		else
+		{
+			write(1, &format[i], 1);
+			count++;
+		}
+		i++;
 	}
-	
-	return 0;
+	return count;
 }

@@ -36,7 +36,7 @@ int ft_putptr(void *ptr)
 		return(write(1,"(nil)", 5));
 	count = 2;
 	write(1, "0x", 2);
-	count += ft_puthexadecimal((long long int)ptr, 0);
+	count += ft_puthexadecimal((long int)ptr, 0);
 	return (count);
 }
 
