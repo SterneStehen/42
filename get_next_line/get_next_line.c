@@ -26,7 +26,7 @@
 #include <fcntl.h>
 
 #define SIZE 10
-size_t	ft_strlen(const char *str)
+/*size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
@@ -70,7 +70,7 @@ char	*ft_strdup(const char *s)
 	dst[len] = '\0';
 	return (dst);
 }
-
+*/
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		i;
@@ -122,7 +122,6 @@ char *ft_get_next_line(int fd)
 	
 	buff = malloc(SIZE+1);
 	join = malloc(2);
-	//remainder = malloc(SIZE);	
 	int read_buf;	
 	int i;
 	int j;
@@ -132,13 +131,34 @@ char *ft_get_next_line(int fd)
 	j = 0;
 	flag = 1;
 	join[0] = '\0';
+	
 	if(remainder)
-		join = ft_strdup(remainder);
+	{
+		while (remainder[i] != '\n')
+		{
+			i++;
+		}
+		if(remainder[i-1]=='\n')
+		{
+			while (j<i)
+			{
+				join[j++] = remainder[j++];
+			}
+			join[j] = '\0';
+			flag = 0;			
+		}
+		else
+		{
+			join = ft_strjoin(join, remainder);
+		}
+	}
 	else
+	{
 		remainder = malloc(2);
 		remainder[0] = '\0';
+	}
 	
-	join = ft_strjoin(join, remainder);
+	//join = ft_strjoin(join, remainder);
 	while (flag && (read_buf = read(fd, buff, SIZE)))
 	{
 		buff[SIZE] = '\0';
@@ -150,8 +170,8 @@ char *ft_get_next_line(int fd)
 				buff[i] = '\0';
 				while (buff[++i] != '\0')
 				{
-					remainder[j] = buff[i];
-					j++;
+					remainder[j++] = buff[i];
+					//j++;
 				}
 				remainder[j-1] = '\0';
 				//puts(remainder);
