@@ -10,3 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+# ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include "get_next_line.h"
+#define SIZE 10
+
+// char	*ft_strnew(size_t size);
+// size_t	ft_strlen(const char *str);
+// void	*ft_memcpy(void *dest, const void *src, size_t n);
+// char 	*ft_strdup(const char *s);
+// char	*ft_strjoin(char const *s1, char const *s2);
+// char	*ft_strchr(const char *s, int c);
+// char 	* ft_check_remainder (char **remainder, char  *line, int *flag);
+// char 	*ft_get_next_line(int fd);
+
+#endif

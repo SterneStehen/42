@@ -21,11 +21,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
 
-//#define SIZE 300
+//#include "get_next_line.h"
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <fcntl.h>
+
+#define SIZE 300
+char *ft_strnew(size_t size)
+{
+	char *str;
+	size_t i;
+
+	i = 0;
+	str = malloc(size + 1);
+	if(!str)
+		return NULL;
+	while (i <= size)
+		str[i++] = '\0';
+	return (str);
+}
+
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
@@ -114,123 +130,63 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
+char * ft_check_remainder (char **remainder, char  *line, int *flag)
+{
+	char		*occurrent_remaind;
+
+	occurrent_remaind = ft_strnew(1);
+
+ 	if(*remainder)
+	{
+		if ((occurrent_remaind = ft_strchr(*remainder, '\n')))
+		{
+			*occurrent_remaind = '\0';
+			line = ft_strdup(*remainder);
+			*flag = 0;
+			*remainder = ft_strdup(++occurrent_remaind);
+			free(occurrent_remaind);
+			return line;
+			}
+		else
+		{
+			line = ft_strjoin(line, *remainder);
+			return line;
+		}
+	}
+	else
+	{
+		*remainder = ft_strnew(1);
+		return line;
+	}
+}
+
 char *ft_get_next_line(int fd)
 {
 	char		*buff_str;
 	char 		*join;
 	char		*occurrent_buff;
-	char		*occurrent_remaind;
-	char		*tmp;
 	static char *remainder;
-	int 		buff_len;
+	int 		read_buf;	
+	int 		flag;
 	
-	buff_str = malloc(buff_len);
-	join = malloc(2);
-	occurrent_buff = malloc(2);
-	occurrent_remaind = malloc(2);
-	int read_buf;	
-	int i;
-	int j;
-	int flag;
-	buff_len = 1000;
-	
-	
-	i = 0;
-	j = 0;
 	flag = 1;
-	join[0] = '\0';
-	occurrent_buff[0] = '\0';
-	occurrent_remaind[0] = '\0';
-	
-	if(remainder)
-	{
-		// while (remainder[i] != '\n' && remainder[i] != '\0')
-		// {
-		// 	i++;
-		// }
-		if ((occurrent_remaind = ft_strchr(remainder, '\n')))
-		{
-			*occurrent_remaind = '\0';
-			//join = ft_strjoin(join, remainder);
-			join = ft_strdup(remainder);
-			flag = 0;
-			//occurrent_remaind++;
-			remainder = ft_strdup(++occurrent_remaind);
-			free(occurrent_remaind);
-			//remainder[0] = '\0';
-			return join;
-		}
-		// if(remainder[i-1]=='\n')
-		// {
-		// 	while (j<i)
-		// 	{
-		// 		join[j] = remainder[j];
-		// 		j++;
-		// 	}
-		// 	join[j] = '\0';
-		// 	flag = 0;			
-		// }
-		else
-		{
-			join = ft_strjoin(join, remainder);
-			free(remainder);
-		}
-		i = 0;
-	}
-	else
-	{
-		remainder = malloc(2);
-		remainder[0] = '\0';
-	}
-	
-	//join = ft_strjoin(join, remainder);
-	while (flag && (read_buf = read(fd, buff_str, buff_len-1)))
+	buff_str = ft_strnew(SIZE);
+	join = ft_strnew(1);
+	occurrent_buff = ft_strnew(1);
+	join = ft_check_remainder(&remainder, join, &flag);
+	while (flag && (read_buf = read(fd, buff_str, SIZE)))
 	{
 		buff_str[read_buf] = '\0';
-		;
 		if ((occurrent_buff = ft_strchr(buff_str, '\n')))
 		{
 			flag = 0;
-			//buff_str[read_buf] = '\0';
 			*occurrent_buff = '\0';
-			//occurrent_buff++;
 			remainder = ft_strdup(++occurrent_buff);
 			free(occurrent_buff);
-			// while (occurrent_buff[i] != '\0')
-			// {
-			// 	remainder[i] = occurrent_buff[i];
-			// 	i++;
-			// }
-			// remainder[i-1] = '\0';
-			//printf("Occurent = %s\n", occurrent);
 		}
-		// while (buff[i++] != '\0')
-		// {
-  		// 	if(buff[i] == '\n')
-		// 	{
-		// 		flag = 0;
-		// 		buff[i] = '\0';
-		// 		while (buff[++i] != '\0')
-		// 		{
-		// 			remainder[j++] = buff[i];
-		// 			//j++;
-		// 		}
-		// 		remainder[j-1] = '\0';
-		// 		//puts(remainder);
-		// 		break;;
-		// 	}
-		//}
-		i = 0;
-		tmp = join;
 		join = ft_strjoin(join, buff_str);
-		free(tmp);
-		//if (flag == 0)
-		//	break;
-		//puts(buff);
 	}
 	free(buff_str);
-	//free(occurrent_buff);
-	
 	return join;
 }
 

@@ -10,11 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <fcntl.h>
 
-#define SIZE 10
+#include "get_next_line.h"
+
+char *ft_strnew(size_t size)
+{
+	char *str;
+	size_t i;
+
+	i = 0;
+	str = malloc(size + 1);
+	if(!str)
+		return NULL;
+	while (i <= size)
+		str[i++] = '\0';
+	return (str);
+}
+
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
@@ -58,48 +73,5 @@ char	*ft_strdup(const char *s)
 	ft_memcpy(dst, s, len);
 	dst[len] = '\0';
 	return (dst);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	int		i;
-	int		j;
-	char	*result;
-
-	i = 0;
-	j = 0;
-	while (s1[i])
-	{
-		i++;
-	}
-	while (s2[j])
-	{
-		j++;
-	}
-	result = (char *) malloc(sizeof(char) * (i + j + 1));
-	if (!result)
-		return (NULL);
-	i = 0;
-	while (*s1)
-		result[i++] = *s1++;
-	while (*s2)
-		result[i++] = *s2++;
-	result[i] = '\0';
-	return (result);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s)
-	{
-		if (*s == (char)c)
-		{
-			return ((char *)s);
-		}
-		s++;
-	}
-	if ((char)c == '\0')
-		return ((char *)s);
-	return (NULL);
 }
 
