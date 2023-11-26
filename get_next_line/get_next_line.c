@@ -25,8 +25,8 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-#define SIZE 10
-/*size_t	ft_strlen(const char *str)
+//#define SIZE 300
+size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
@@ -70,7 +70,7 @@ char	*ft_strdup(const char *s)
 	dst[len] = '\0';
 	return (dst);
 }
-*/
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		i;
@@ -116,13 +116,15 @@ char	*ft_strchr(const char *s, int c)
 
 char *ft_get_next_line(int fd)
 {
-	char		*buff;
+	char		*buff_str;
 	char 		*join;
 	char		*occurrent_buff;
 	char		*occurrent_remaind;
+	char		*tmp;
 	static char *remainder;
+	int 		buff_len;
 	
-	buff = malloc(SIZE+1);
+	buff_str = malloc(buff_len);
 	join = malloc(2);
 	occurrent_buff = malloc(2);
 	occurrent_remaind = malloc(2);
@@ -130,6 +132,7 @@ char *ft_get_next_line(int fd)
 	int i;
 	int j;
 	int flag;
+	buff_len = 1000;
 	
 	
 	i = 0;
@@ -148,9 +151,13 @@ char *ft_get_next_line(int fd)
 		if ((occurrent_remaind = ft_strchr(remainder, '\n')))
 		{
 			*occurrent_remaind = '\0';
-			join = ft_strjoin(join, remainder);
+			//join = ft_strjoin(join, remainder);
+			join = ft_strdup(remainder);
 			flag = 0;
-			remainder[0] = '\0';
+			//occurrent_remaind++;
+			remainder = ft_strdup(++occurrent_remaind);
+			free(occurrent_remaind);
+			//remainder[0] = '\0';
 			return join;
 		}
 		// if(remainder[i-1]=='\n')
@@ -166,6 +173,7 @@ char *ft_get_next_line(int fd)
 		else
 		{
 			join = ft_strjoin(join, remainder);
+			free(remainder);
 		}
 		i = 0;
 	}
@@ -176,21 +184,24 @@ char *ft_get_next_line(int fd)
 	}
 	
 	//join = ft_strjoin(join, remainder);
-	while (flag && (read_buf = read(fd, buff, SIZE)))
+	while (flag && (read_buf = read(fd, buff_str, buff_len-1)))
 	{
-		buff[SIZE] = '\0';
+		buff_str[read_buf] = '\0';
 		;
-		if ((occurrent_buff = ft_strchr(buff, '\n')))
+		if ((occurrent_buff = ft_strchr(buff_str, '\n')))
 		{
 			flag = 0;
+			//buff_str[read_buf] = '\0';
 			*occurrent_buff = '\0';
-			occurrent_buff++;
-			while (occurrent_buff[i] != '\0' && (i < SIZE))
-			{
-				remainder[i] = occurrent_buff[i];
-				i++;
-			}
-			remainder[i-1] = '\0';
+			//occurrent_buff++;
+			remainder = ft_strdup(++occurrent_buff);
+			free(occurrent_buff);
+			// while (occurrent_buff[i] != '\0')
+			// {
+			// 	remainder[i] = occurrent_buff[i];
+			// 	i++;
+			// }
+			// remainder[i-1] = '\0';
 			//printf("Occurent = %s\n", occurrent);
 		}
 		// while (buff[i++] != '\0')
@@ -210,14 +221,16 @@ char *ft_get_next_line(int fd)
 		// 	}
 		//}
 		i = 0;
-		join = ft_strjoin(join, buff);
+		tmp = join;
+		join = ft_strjoin(join, buff_str);
+		free(tmp);
 		//if (flag == 0)
 		//	break;
 		//puts(buff);
 	}
-	free(buff);
+	free(buff_str);
 	//free(occurrent_buff);
-	//free(occurrent_remaind);
+	
 	return join;
 }
 
@@ -227,6 +240,9 @@ int main()
 	char *line;
 	line = "Hello";
 	fd = open("text.txt", O_RDONLY);
+	line = ft_get_next_line(fd);
+	puts(line);
+	free(line);
 	line = ft_get_next_line(fd);
 	puts(line);
 	free(line);
