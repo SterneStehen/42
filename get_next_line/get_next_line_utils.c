@@ -15,7 +15,6 @@
 // #include <fcntl.h>
 
 #include "get_next_line.h"
-
 char *ft_strnew(size_t size)
 {
 	char *str;
@@ -74,4 +73,3 @@ char	*ft_strdup(const char *s)
 	dst[len] = '\0';
 	return (dst);
 }
-
