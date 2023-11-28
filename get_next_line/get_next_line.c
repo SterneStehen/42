@@ -6,10 +6,10 @@
 /*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 23:47:39 by smoreron          #+#    #+#             */
-/*   Updated: 2023/11/22 23:47:39 by smoreron         ###   ########.fr       */
+/*   Updated: 2023/11/28 03:38:58 by smoreron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/* ************************************************************************** */
+
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
@@ -23,18 +23,82 @@
 
 
 #include "get_next_line.h"
- //#include <stdio.h>
- //#include <stdlib.h>
- //#include <fcntl.h>
+//  #include <stdio.h>
+//  #include <stdlib.h>
+//  #include <fcntl.h>
+//  #include <stdio.h>
+// #include <stdlib.h>
+// #include <fcntl.h>
+// #include <unistd.h>
+// #include <stdbool.h>
 
-//#define SIZE 300
+// #define BUFFER_SIZE 300
 
+
+// char *ft_strnew(size_t size)
+// {
+// 	char *str;
+// 	size_t i;
+// 	i = 0;
+// 	str = malloc(size + 1);
+// 	if(!str)
+// 		return NULL;
+// 	while (i <= size)
+// 		str[i++] = '\0';
+// 	return (str);
+// }
+
+// size_t	ft_strlen(const char *str)
+// {
+// 	size_t	i;
+// 	i = 0;
+// 	while (str[i] != '\0')
+// 	{
+// 		i++;
+// 	}
+// 	return (i);
+// }
+
+// void	*ft_memcpy(void *dest, const void *src, size_t n)
+// {
+// 	size_t				i;
+// 	unsigned char		*str1;
+// 	const unsigned char	*str2;
+// 	if (n == 0 || (!dest && !src))
+// 		return (dest);
+// 	i = 0;
+// 	str1 = (unsigned char *)dest;
+// 	str2 = (const unsigned char *)src;
+// 	while (i < n)
+// 	{
+// 		str1[i] = str2[i];
+// 		i++;
+// 	}
+// 	return (dest);
+// }
+
+// char	*ft_strdup(const char *s)
+// {
+// 	char	*dst;
+// 	size_t	len;
+
+// 	len = ft_strlen(s);
+// 	dst = (char *)malloc((sizeof(char) * len) + 1);
+// 	if (!dst)
+// 		return (0);
+// 	ft_memcpy(dst, s, len);
+// 	dst[len] = '\0';
+// 	return (dst);
+// }
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		i;
 	int		j;
 	char	*result;
+	
+	if (!s1 && !s2)
+		return (NULL);
 
 	i = 0;
 	j = 0;
@@ -73,34 +137,36 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char * ft_check_remainder (char **remainder, char  *line, int *flag)
+void ft_check_remainder (char **remainder, char  **line, int *flag)
 {
 	char		*occurrent_remaind;
 
-	occurrent_remaind = ft_strnew(1);
+	//occurrent_remaind = NULL;
 
  	if(*remainder)
 	{
 		if ((occurrent_remaind = ft_strchr(*remainder, '\n')))
 		{
-			*occurrent_remaind = '\0';
-			line = ft_strdup(*remainder);
 			*flag = 0;
-			*remainder = ft_strdup(++occurrent_remaind);
-			//free(occurrent_remaind);
-			return line;
-			}
+			*occurrent_remaind = '\0';
+			*line = ft_strjoin(*remainder, "\n");
+		}
 		else
 		{
-			line = ft_strjoin(line, *remainder);
-			return line;
+			// line = ft_strjoin(line, *remainder);
+			// return line;
+			*line = ft_strjoin(*line, *remainder);
+            free(*remainder);
+            *remainder = NULL;
+            //return line;
 		}
 	}
 	else
 	{
-		*remainder = ft_strnew(1);
-		return line;
+		free(*remainder);
+		*remainder = NULL;
 	}
+	//return line;
 }
 
 char *get_next_line(int fd)
@@ -108,28 +174,60 @@ char *get_next_line(int fd)
 	char		*buff_str;
 	char 		*join;
 	char		*occurrent_buff;
+	char		*temp;
 	static char *remainder;
-	int 		read_buf;	
+	int 		read_len;	
 	int 		flag;
 	
+	
+	if (fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0 || fd > 4095)
+	{
+		return (NULL);
+	}
 	flag = 1;
 	buff_str = ft_strnew(BUFFER_SIZE);
+	if(!buff_str)
+	 	return NULL;
 	join = ft_strnew(1);
-	occurrent_buff = ft_strnew(1);
-	join = ft_check_remainder(&remainder, join, &flag);
-	while (flag && (read_buf = read(fd, buff_str, BUFFER_SIZE)))
+	if(!join)
 	{
-		buff_str[read_buf] = '\0';
+		free(buff_str);
+	 	return NULL;
+	}
+	occurrent_buff = NULL;
+	ft_check_remainder(&remainder, &join, &flag);
+	while (flag == 1)
+	{
+		read_len = read(fd, buff_str, BUFFER_SIZE);
+		if (read_len <= 0)
+		{
+			free(buff_str);
+			free(join);
+			free(remainder);
+			return (NULL);
+		}
+		buff_str[read_len] = '\0';
 		if ((occurrent_buff = ft_strchr(buff_str, '\n')))
 		{
 			flag = 0;
-			*occurrent_buff = '\0';
+			//*occurrent_buff = '\0';
 			remainder = ft_strdup(++occurrent_buff);
-			//free(occurrent_buff);
-		}
-		join = ft_strjoin(join, buff_str);
+			//occurrent_buff++;
+			*occurrent_buff = '\0';
+		} 
+		temp = join;
+		join = ft_strjoin(temp, buff_str);
+		//join = ft_strjoin(temp, buffer);
+		free (temp);
+		if (!join)
+			return (NULL);
 	}
 	free(buff_str);
+	if (join == NULL)
+	{
+		free(join);
+		return (NULL);
+	}
 	return join;
 }
 

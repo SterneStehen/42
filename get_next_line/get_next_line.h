@@ -6,7 +6,7 @@
 /*   By: smoreron <7353718@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 23:47:36 by smoreron          #+#    #+#             */
-/*   Updated: 2023/11/22 23:47:36 by smoreron         ###   ########.fr       */
+/*   Updated: 2023/11/28 03:39:43 by smoreron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 char 	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
-char 	* ft_check_remainder (char **remainder, char  *line, int *flag);
+void 	ft_check_remainder (char **remainder, char  **line, int *flag);
 char 	*get_next_line(int fd);
 
 #endif
