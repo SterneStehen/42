@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME = libftprintf.a
+
 SRC = ft_printf.c ft_put.c
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

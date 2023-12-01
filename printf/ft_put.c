@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "ft_printf.h"
 
 
@@ -45,6 +46,7 @@ int ft_putptr(void *ptr)
 	count += ft_puthexadecimal((long int)ptr, 1);
 	return (count);
 }
+
 int ft_puthexadecimal(unsigned int number, int low_up_case)
 {
 	int count;

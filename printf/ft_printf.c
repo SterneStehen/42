@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
+//#include <stdarg.h>
 
-int ft_case(char str, va_list args)
+int	ft_case(char str, va_list args)
 {
 	switch (str)
 	{
@@ -35,9 +35,10 @@ int ft_case(char str, va_list args)
 		return(ft_puthexadecimal(va_arg(args, int), 1));
 	case '%':
 		return (write(1, "%", 1));
-	return (0);
 	}
+	return (0);
 }
+
 int ft_printf(const char *format, ...)
 {
 	va_list ap;
