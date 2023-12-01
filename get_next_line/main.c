@@ -4,6 +4,7 @@ int main()
 {
 	int fd;
 	char *line;
+	printf("test");
 	line = ft_strnew(1);
 	fd = open("text.txt", O_RDONLY);
 	line = get_next_line(fd);
