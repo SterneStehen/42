@@ -10,24 +10,37 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+TARGET = libftprintf.a
 
-SRC = ft_printf.c ft_put.c
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-OBJ = $(SRC:.c=.o)
 
-all: $(NAME)
+SRC = $(wildcard *c)
+OBJ = $(patsubst %.c, %.o, $(SRC))
 
-$(NAME): $(OBJ)
-		ar rcs $(NAME) $(OBJ)
+$(TARGET) : $(OBJ)
+	$(CC) $(OBJ) -o $(TARGET)
 
-clean:
-		rm -f $(OBJ)
+# libftprintf : main.o ft_printf.o ft_put.o
+# 	cc main.o ft_printf.o ft_put.o libftprintf
 
-fclean: clean
-		rm -f $(NAME)
+%.o : %.c 
+	$(CC) -c $< -o $@
 
-re: fclean $(NAME)
 
-.PHONY: all clean fclean re
+# %.c : %.o 
+# 	$(CC) -c $(SRC) -o $(OBJ)
+
+# $(TARGET) : main.o ft_printf.o ft_put.o
+# 	main.o ft_printf.o ft_put.o -o $(TARGET)
+
+# main.o : main.c
+# 	$(CC) -c main.c -o main.o
+
+# ft_printf.o : ft_printf.c
+# 	$(CC) -c ft_printf.c -o ft_printf.o
+
+# ft_put.o : ft_put.c
+# 	$(CC) -c ft_put.c -o ft_put.o
+
+clean :
+	rm $(TARGET) *.o
