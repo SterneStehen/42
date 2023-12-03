@@ -90,6 +90,35 @@
 // 	return (str);
 // }
 
+char	*ft_strjoin_free( char	*s1, char	*s2)
+{
+	size_t	i;
+	size_t	j;
+	char	*str;
+
+	if (s2 == 0)
+		return (NULL);
+	i = 0;
+	j = 0;
+	if (s1 == 0)
+		s1 = ft_strnew(1);
+	str = ft_strnew((ft_strlen(s1) + ft_strlen(s2)) + 1);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
+	str[i] = '\0';
+	free(s1);
+	return (str);
+}
+
 char	*ft_newline(int fd, char *remainder)
 {
 	char	*buffer;
