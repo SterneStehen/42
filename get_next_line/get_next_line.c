@@ -97,7 +97,7 @@ char	*ft_newline(int fd, char *remainder)
 	int		flag;
 
 	flag = 1;
-	buffer = ft_strnew ( BUFFER_SIZE + 1);
+	buffer = ft_strnew(BUFFER_SIZE + 1);
 	while (flag != 0)
 	{
 		len = ft_read(fd, &buffer);
