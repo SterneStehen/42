@@ -19,14 +19,11 @@
 // #include <fcntl.h>
 // #include <unistd.h>
 // #include <stdbool.h>
-
 // #define BUFFER_SIZE 50
-
 // char *ft_strnew(size_t size)
 // {
 // 	char *str;
 // 	size_t i;
-
 // 	i = 0;
 // 	str = malloc(size + 1);
 // 	if(!str)
@@ -93,21 +90,19 @@
 // 	return (str);
 // }
 
-
-
 char	*ft_newline(int fd, char *remainder)
 {
-	char *buffer;
-	int len;
-	int flag;
+	char	*buffer;
+	int		len;
+	int		flag;
 
 	flag = 1;
-	buffer = ft_strnew(BUFFER_SIZE+1);
+	buffer = ft_strnew ( BUFFER_SIZE + 1);
 	while (flag != 0)
 	{
 		len = ft_read(fd, &buffer);
 		remainder = ft_strjoin_free(remainder, buffer);
-		if((ft_strchr(remainder, '\n')) || len == 0)
+		if ((ft_strchr (remainder, '\n')) || len == 0)
 			flag = 0;
 	}
 	free(buffer);
@@ -116,41 +111,40 @@ char	*ft_newline(int fd, char *remainder)
 
 char	*ft_returnline(char *remainder)
 {
-	char *s;
-	int i;
-	int j;
+	char	*s;
+	int		i;
+	int		j;
 
 	i = 0;
 	if (remainder[0] == 0)
 		return (NULL);
 	j = ft_lennewstr(remainder);
-	s = ft_strnew((j+1));
+	s = ft_strnew((j + 1));
 	while (remainder[i])
 	{
 		s[i] = remainder[i];
-		if(remainder[i] == '\n')
+		if (remainder[i] == '\n')
 		{
-			s[i+1] ='\0';
-			break; 
+			s[i + 1] = '\0';
+			break ;
 		}
-		i++;			
+		i++;
 	}
-	
 	return (s);
 }
 
 char	*ft_remainderline(char *remainder)
 {
-	char *s;
-	int i;
-	int j;	
-	int len;
-	
+	char	*s;
+	int		i;
+	int		j;
+	int		len;
+
 	j = 0;
 	len = ft_strlen(remainder);
 	s = NULL;
-	i = ft_lennewstr(remainder);
-	if(!remainder[i])
+	i = ft_lennewstr (remainder);
+	if (!remainder [i])
 	{
 		free(remainder);
 		return (NULL);
@@ -160,13 +154,14 @@ char	*ft_remainderline(char *remainder)
 		s[j++] = remainder[++i];
 	s[j] = '\0';
 	free(remainder);
-	return s;	
+	return (s);
 }
 
 char	*get_next_line(int fd)
 {
-	static char * remainder;
-	char * join;
+	static char	*remainder;
+	char		*join;
+
 	if (fd < 0 || read(fd, 0, 0) < 0 || BUFFER_SIZE <= 0)
 	{
 		free (remainder);
@@ -178,8 +173,6 @@ char	*get_next_line(int fd)
 	remainder = ft_remainderline(remainder);
 	return (join);
 }
-
-
 
 // int main()
 // {

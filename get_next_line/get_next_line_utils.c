@@ -16,15 +16,15 @@
 
 #include "get_next_line.h"
 
-char *ft_strnew(size_t size)
+char	*ft_strnew(size_t size)
 {
-	char *str;
-	size_t i;
+	char	*str;
+	size_t	i;
 
 	i = 0;
 	str = malloc(size + 1);
-	if(!str)
-		return NULL;
+	if (! str)
+		return (NULL);
 	while (i <= size)
 		str[i++] = '\0';
 	return (str);
@@ -44,9 +44,9 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-int ft_lennewstr(char *remainder)
+int	ft_lennewstr(char	*remainder)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (remainder[i] != '\0' && remainder[i] != '\n')
@@ -56,20 +56,19 @@ int ft_lennewstr(char *remainder)
 	return (i);
 }
 
-int ft_read(int fd,char  **buffer)
+int	ft_read( int fd, char	**buffer)
 {
-	int len;
-	//*buffer = ft_strnew(BUFFER_SIZE+1);
-	
+	int	len;
+
 	len = read(fd, *buffer, BUFFER_SIZE);
-		if (len	< 0)
-		{
-			free(*buffer);
-			buffer = NULL;
-			return (0);
-		}
+	if (len < 0)
+	{
+		free (*buffer);
+		buffer = (NULL);
+		return (0);
+	}
 	(*buffer)[len] = '\0';
-	return len;
+	return (len);
 }
 
 char	*ft_strchr(char *s, int c)
@@ -79,14 +78,14 @@ char	*ft_strchr(char *s, int c)
 	while (*s++)
 	{
 		if (*s == (char)c)
-			return s;	
+			return (s);
 	}
 	if ((char)c == '\0')
-		return s;
+		return (s);
 	return (NULL);
 }
 
-char	*ft_strjoin_free(char *s1, char *s2)
+char	*ft_strjoin_free ( char	*s1, char	*s2)
 {
 	size_t	i;
 	size_t	j;
@@ -114,5 +113,3 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	free(s1);
 	return (str);
 }
-
-
