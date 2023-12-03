@@ -10,14 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef FT_PRINTF_H
-# define FT_PRINTF_H
 
-#include "ft_printf.h"
-//#include <stdio.h>
-#include <stdarg.h>
-#include <unistd.h>
-#include <stddef.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# include <stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
+// # ifndef FT_PRINTF_H
+// # define FT_PRINTF_H
+
+// #include "ft_printf.h"
+// #include <stdio.h>
+// #include <stdarg.h>
+// #include <unistd.h>
+// #include <stddef.h>
 
 int ft_printf(const char *format, ...);
 int	ft_puthexadecimal(unsigned int number, int low_up_case);

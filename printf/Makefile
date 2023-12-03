@@ -9,38 +9,33 @@
 #    Updated: 2023/11/21 16:15:22 by smoreron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+NAME = libftprintf.a
 
-TARGET = libftprintf.a
-
-CC = cc
-
-SRC = $(wildcard *c)
+SRC = ft_printf.c ft_put.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 
-$(TARGET) : $(OBJ)
-	$(CC) $(OBJ) -o $(TARGET)
+CC = cc
+CFLAGS = -Wall -Werror -Wextra
 
-# libftprintf : main.o ft_printf.o ft_put.o
-# 	cc main.o ft_printf.o ft_put.o libftprintf
+all: $(NAME)
 
-%.o : %.c 
-	$(CC) -c $< -o $@
+# $(NAME): $(OBJ)
+# 	$(CC) $(OBJ) -o $(NAME)
 
+$(NAME): $(OBJ)
+	@ar -rcs $(NAME) $(OBJ)
 
-# %.c : %.o 
-# 	$(CC) -c $(SRC) -o $(OBJ)
-
-# $(TARGET) : main.o ft_printf.o ft_put.o
-# 	main.o ft_printf.o ft_put.o -o $(TARGET)
-
-# main.o : main.c
-# 	$(CC) -c main.c -o main.o
-
-# ft_printf.o : ft_printf.c
-# 	$(CC) -c ft_printf.c -o ft_printf.o
-
-# ft_put.o : ft_put.c
-# 	$(CC) -c ft_put.c -o ft_put.o
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	rm $(TARGET) *.o
+	rm -f *.o
+
+fclean :
+	rm -f $(NAME) *.o
+
+re :
+	fclean all
+
+.PHONY: all clean fclean re
+
